@@ -11,7 +11,7 @@ class DbOperation
         $this->con = $db->connect();
     }
     //adding a record to database
-    public function createArtist($first_name, $last_name, $employee_code){
+    public function createArtist($first_name, $last_name, $employee_code, $phone_number){
         $stmt = $this->con->prepare("INSERT INTO DRM (first_name, last_name, employee_code, phone_number) VALUES (?, ?, ?, ?)");
         $stmt->bind_param("ssss", $first_name, $last_name, $employee_code, $phone_number);
         if($stmt->execute())
