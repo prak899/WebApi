@@ -15,6 +15,7 @@
  case 'drmdata':
  if(isset ($_POST['first_name']) and isset($_POST['last_name']) and isset($_POST['employee_code']) and isset($_POST['phone_number'])){
  $db = new DbOperation(); 
+
  if($db->createArtist($_POST['first_name'], $_POST['last_name'], $_POST['employee_code'], $_POST['phone_number'])){
         $response['error'] = false;
         $response['message'] = 'Sucess!';

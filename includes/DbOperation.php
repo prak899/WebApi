@@ -2,7 +2,7 @@
  
 class DbOperation
 {
-    private $con;
+    public $con;
     
     function __construct()
     {
@@ -36,4 +36,5 @@ class DbOperation
         return $artists; 
     }
 }
+
 ?>
