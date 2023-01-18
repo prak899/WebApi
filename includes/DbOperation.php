@@ -10,10 +10,10 @@ class DbOperation
         $db = new DbConnect();
         $this->con = $db->connect();
     }
-    //adding a record to database  $last_name, $employee_code, $phone_number, employee_code, phone_number  , $last_name, $employee_code, $phone_number
-    public function createArtist($first_name, $last_name){
-        $stmt = $this->con->prepare("INSERT INTO DRM (first_name, last_name) VALUES (?, ?)");
-        $stmt->bind_param("ss", $first_name, $last_name);
+    //adding a record to database
+    public function createArtist($first_name, $last_name, $employee_code){
+        $stmt = $this->con->prepare("INSERT INTO DRM (first_name, last_name, employee_code, phone_number) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("ssss", $first_name, $last_name, $employee_code, $phone_number);
         if($stmt->execute())
         return true; 
         return false; 
@@ -27,12 +27,11 @@ class DbOperation
         $artists = array();
         
         while($stmt->fetch()){
-
-            $temp = array(); 
-            $temp['ID'] = $id; 
-            $temp['First Name'] = $first_name; 
-            $temp['Last Name'] = $last_name; 
-            array_push($artists, $temp);
+        $temp = array(); 
+        $temp['ID'] = $id; 
+        $temp['First Name'] = $first_name; 
+        $temp['Last Name'] = $last_name; 
+        array_push($artists, $temp);
         }
         return $artists; 
     }

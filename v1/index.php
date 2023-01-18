@@ -12,15 +12,15 @@
  //switching the get op value 
  switch($_GET['op']){
 
- case 'irad':
- if(isset ($_POST['first_name']) and isset($_POST['last_name']) ){
+ case 'drmdata':
+ if(isset ($_POST['first_name']) and isset($_POST['last_name']) and isset($_POST['employee_code']) and isset($_POST['phone_number'])){
  $db = new DbOperation(); 
- if($db->createArtist($_POST['first_name'], $_POST['last_name'])){
+ if($db->createArtist($_POST['first_name'], $_POST['last_name'], $_POST['employee_code'], $_POST['phone_number'])){
         $response['error'] = false;
-        $response['message'] = 'Artist added successfully';
+        $response['message'] = 'Sucess!';
  }else{
         $response['error'] = true;
-        $response['message'] = 'Could not add artist';
+        $response['message'] = 'Could not add data';
  }
  }else{
         $response['error'] = true; 
@@ -54,6 +54,6 @@
         $response['message'] = 'Invalid Request';
  }
  
-    //displaying the data in json 
+ //displaying the data in json 
     echo json_encode($response);
  ?>
