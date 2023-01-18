@@ -13,9 +13,9 @@
  switch($_GET['op']){
 
  case 'irad':
- if(isset ($_POST['first_name']) and isset($_POST['last_name']) and isset($_POST['employee_code'])){
+ if(isset ($_POST['first_name']) and isset($_POST['last_name']) ){
  $db = new DbOperation(); 
- if($db->createArtist($_POST['first_name'], $_POST['last_name'], $_POST['employee_code'])){
+ if($db->createArtist($_POST['first_name'], $_POST['last_name'])){
         $response['error'] = false;
         $response['message'] = 'Artist added successfully';
  }else{
@@ -54,6 +54,6 @@
         $response['message'] = 'Invalid Request';
  }
  
- //displaying the data in json 
+    //displaying the data in json 
     echo json_encode($response);
  ?>
