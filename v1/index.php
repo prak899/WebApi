@@ -18,7 +18,7 @@ case 'adddrm':
     $db = new DbOperation(); 
 
     if($db->createArtist($_POST['first_name'], $_POST['last_name'], $_POST['employee_code'], $_POST['phone_number'])){
-            $response['error'] = false;
+            //$response['error'] = false;
             $response['message'] = 'Sucess!';
     }else{
             $response['error'] = true;
@@ -42,7 +42,7 @@ case 'searchdrm':
             $response['message'] = $artists;
     }else{
             $response['error'] = true;
-            $response['message'] = 'Could not add data';
+            $response['message'] = 'Not found!';
     }
     }else{
             $response['error'] = true; 
@@ -86,6 +86,7 @@ default:
         $response['error'] = false; 
         $response['message'] = 'Invalid Request';
  }
+ 
  
     //displaying the data in json 
     echo json_encode($response);
