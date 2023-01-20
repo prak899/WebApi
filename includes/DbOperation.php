@@ -8,7 +8,7 @@ class DbOperation
     {
         require_once dirname(__FILE__) . '/DbConnect.php';
         $db = new DbConnect();
-        $this->con = $db->connect();
+        $this -> con = $db -> connect();
     }
     //adding a record to database
     public function createArtist($first_name, $last_name, $employee_code, $phone_number){
