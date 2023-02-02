@@ -1,5 +1,6 @@
 <?php 
- 
+ header("Content-Type: application/json");
+ header("Acess-Control-Allow-Origin: *");
  //adding dboperation file 
  require_once '../includes/DbOperation.php';
  
@@ -18,15 +19,15 @@ case 'adddrm':
     $db = new DbOperation(); 
 
     if($db->createArtist($_POST['first_name'], $_POST['last_name'], $_POST['employee_code'], $_POST['phone_number'])){
-            //$response['error'] = false;
-            $response['message'] = 'Sucess!';
+        $response['status'] = 200;
+        $response['message'] = 'DRM Added!';
     }else{
-            $response['error'] = true;
-            $response['message'] = 'Could not add data';
+        $response['status'] = 404;
+        $response['message'] = 'Could not add data';
     }
     }else{
-            $response['error'] = true; 
-            $response['message'] = 'Required Parameters are missing';
+        $response['status'] = 200;
+        $response['message'] = 'Required Parameters are missing';
     }
     break;
    
@@ -38,15 +39,16 @@ case 'searchdrm':
 
 
     if($db->searchUsers($_POST['id'])){
-            $response['error'] = false;
-            $response['message'] = $artists;
+        $response['error'] = false;
+        $response['message'] = $artists;
     }else{
-            $response['error'] = true;
-            $response['message'] = 'Not found!';
+        $response['error'] = true;
+        $response['message'] = 'Not found!';
     }
     }else{
-            $response['error'] = true; 
-            $response['message'] = 'Required Parameters are missing';
+        $response['error'] = true; 
+        $response['message'] = 'Required Parameters are missing';
+            
     }
     break; 
  
@@ -55,11 +57,12 @@ case 'drmlist':
     $db = new DbOperation();
     $artists = $db -> getArtists();
     if(count($artists) <= 0){
-            $response['error'] = true;
-            $response['message'] = 'Nothing found in the database';
+        $response['error'] = true;
+        $response['message'] = 'Nothing found in the database';
     }else{     
-            $response['error'] = false; 
-            $response['artists'] = $artists;
+        $response['error'] = false; 
+        $response['drms'] = $artists;	
+            	
     }
     break; 
 
@@ -73,7 +76,8 @@ case 'users':
     }
     else{
         $response['error'] = false; 
-        $response['artists'] = $users;
+        $response['users'] = $users;	
+
     }
     break;
 
@@ -90,4 +94,5 @@ default:
  
     //displaying the data in json 
     echo json_encode($response);
+    
  ?>
