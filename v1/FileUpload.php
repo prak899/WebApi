@@ -28,6 +28,7 @@ else
 	$valid_extensions = array('jpeg', 'jpg', 'png', 'gif'); 
 					
 	// allow valid image file formats
+	$msg = false;
 	if(in_array($fileExt, $valid_extensions))
 	{				
 		//check file not exist our upload folder path
@@ -36,6 +37,7 @@ else
 			// check file size '5MB'
 			if($fileSize < 5000000){
 				move_uploaded_file($tempPath, $upload_path . $fileName); // move file from system temporary path to our upload folder path 
+				$msg = true;
 			}
 			else{		
 				$errorMSG = json_encode(array("message" => "Sorry, your file is too large, please upload 5 MB size", "status" => false));	
@@ -57,9 +59,15 @@ else
 // if no error caused, continue ....
 if(!isset($errorMSG))
 {
-	mysqli_query($conn,'INSERT INTO table_image (name) VALUES ("'.$fileName.'")');
-	echo json_encode(array("message" => "Image Uploaded Successfully", "status" => true));	
+	// if($msg == true){
+		$query = mysqli_query($conn,'INSERT INTO table_image (fileName) VALUES ("'.$fileName.'")');
+		if(!empty($query)){
+			echo json_encode(array("message" => "Image Uploaded Successfully", "status" => true));
 
+		} else {
+			echo json_encode(array("message" => "Image Uploaded Failed", "status" => false));
+		}
+	// }
 }
 
 ?>
